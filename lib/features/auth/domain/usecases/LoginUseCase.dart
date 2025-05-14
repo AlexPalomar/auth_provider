@@ -1,13 +1,14 @@
 // domain/usecases/login_usecase.dart
 
-
-import 'package:first_app/features/auth/domain/entities/user.dart';
+import 'package:first_app/features/auth/domain/interfaces/login_repository.dart';
 
 class LoginUseCase {
+  final ILoginRepository loginRepository;
 
+  LoginUseCase(this.loginRepository);
 
-  Future<User?> call(String email, String password) {
-    var repository;
-    return repository.login(email, password);
+  Future<bool?> execute(String email, String password) {
+    print( "Email_usecase: $email");
+    return loginRepository.login(email, password);
   }
 }
