@@ -10,7 +10,7 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     final controller = context.watch<LoginProvider>();
     return Scaffold(
-        appBar: AppBar(title: Text("Login")),
+        appBar: AppBar(title: const Text("Login")),
         body: Padding(
           padding: const EdgeInsets.all(16),
           child: Column(
@@ -31,7 +31,11 @@ class LoginPage extends StatelessWidget {
                 ElevatedButton(
                   onPressed: () async {
                     await controller.login();
-                    if (controller.resp == true) Navigator.pushReplacementNamed(context, '/home');},
+                    if (!context.mounted) return;
+                    if (controller.resp == true) {
+                      Navigator.pushNamed(context, '/home');
+                    }
+                  },
                   child: const Text('Iniciar sesión'),
                 ),
               if (controller.error != null) ...[
